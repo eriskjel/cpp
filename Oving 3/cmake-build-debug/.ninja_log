@@ -1,0 +1,23 @@
+# ninja log v5
+9	92	7159706885970163	CMakeFiles/Oving_3.dir/Circle.cpp.obj	ea1b34defacd171a
+0	337	7159706888411264	CMakeFiles/Oving_3.dir/main.cpp.obj	4589bef0c8fc9223
+3	98	7159723704844445	Oving_3.exe	a316a0021a3dd1a6
+242	336	7159733278295904	CommodityClient.exe	dfabb08d6540b132
+9	218	7159711433645731	CMakeFiles/Oving_3.dir/Commodity.cpp.obj	237208bd51f86650
+2	240	7159711433861052	CMakeFiles/Oving_3.dir/CommodityClient.cpp.obj	e92fec5d8f201b0a
+2	241	7159733277337331	CMakeFiles/CommodityClient.dir/CommodityClient.cpp.obj	e1d03ad8b90a5409
+10	256	7159729400195193	CMakeFiles/CommodityClient.dir/Commodity.cpp.obj	de7789e0ccbaabaf
+0	255	7159745400000544	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+256	412	7159745401534396	Streng.exe	83bb486916ec010e
+3	231	7159745591423571	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+232	319	7159745592313392	Streng.exe	83bb486916ec010e
+2	256	7159747384228583	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+256	352	7159747385185875	Streng.exe	83bb486916ec010e
+2	233	7159747723835849	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+234	319	7159747724693589	Streng.exe	83bb486916ec010e
+2	259	7159752246694714	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+260	375	7159752247848461	Streng.exe	83bb486916ec010e
+2	242	7159752878029119	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+242	339	7159752879002619	Streng.exe	83bb486916ec010e
+2	260	7164035303359856	CMakeFiles/Streng.dir/Streng.cpp.obj	473cf6953948364f
+262	367	7164035304414993	Streng.exe	83bb486916ec010e

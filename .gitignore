@@ -1,3 +1,5 @@
 /Oving 3/cmake-build-debug/
 cmake-build-debug/
 /build
+*.gz
+.idea/

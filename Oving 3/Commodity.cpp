@@ -5,7 +5,6 @@
 #include "Commodity.h"
 #include <string>
 #include <utility>
-#include <iostream>
 
 Commodity::Commodity(std::string name_, int id_, double price_) : name(std::move(name_)), id(id_), price(price_)
 {}

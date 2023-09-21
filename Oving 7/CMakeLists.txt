@@ -3,10 +3,11 @@ project(Oving_7)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Fraction main.cpp
-        Fraction.cpp
-        Fraction.h)
+add_executable(Fraction fraction/main.cpp
+        fraction/Fraction.cpp
+        fraction/Fraction.h)
 
 add_executable(Set
-        Set.cpp
-        Set.h)
+        set/Set.cpp
+        set/Set.h
+        set/main.cpp)

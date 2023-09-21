@@ -5,15 +5,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 
-add_executable(Oving_3 CircleClient.cpp
+add_executable(Circle CircleClient.cpp
         Circle.cpp
-        Circle.h
+        Circle.hpp
         )
 
-add_executable(CommodityClient
+add_executable(Commodity
         CommodityClient.cpp
         Commodity.cpp
-        Commodity.h
+        Commodity.hpp
 )
 
 add_executable(Streng

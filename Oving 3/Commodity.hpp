@@ -2,8 +2,8 @@
 // Created by eriks on 09/09/2023.
 //
 
-#ifndef OVING_3_COMMODITY_H
-#define OVING_3_COMMODITY_H
+#ifndef OVING_3_COMMODITY_HPP
+#define OVING_3_COMMODITY_HPP
 #include <string>
 
 
@@ -26,4 +26,4 @@ private:
 };
 
 
-#endif //OVING_3_COMMODITY_H
+#endif //OVING_3_COMMODITY_HPP

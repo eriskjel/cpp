@@ -2,7 +2,7 @@
 // Created by eriks on 09/09/2023.
 //
 
-#include "Commodity.h"
+#include "Commodity.hpp"
 #include <string>
 #include <utility>
 

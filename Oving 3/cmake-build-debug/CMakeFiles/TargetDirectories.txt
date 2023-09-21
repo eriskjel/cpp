@@ -1,5 +1,0 @@
-C:/Users/eriks/OneDrive - NTNU/NTNU/5. Semester/CPP/Oving 3/cmake-build-debug/CMakeFiles/Oving_3.dir
-C:/Users/eriks/OneDrive - NTNU/NTNU/5. Semester/CPP/Oving 3/cmake-build-debug/CMakeFiles/CommodityClient.dir
-C:/Users/eriks/OneDrive - NTNU/NTNU/5. Semester/CPP/Oving 3/cmake-build-debug/CMakeFiles/Streng.dir
-C:/Users/eriks/OneDrive - NTNU/NTNU/5. Semester/CPP/Oving 3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/eriks/OneDrive - NTNU/NTNU/5. Semester/CPP/Oving 3/cmake-build-debug/CMakeFiles/rebuild_cache.dir

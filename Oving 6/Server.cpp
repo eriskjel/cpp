@@ -1,10 +1,12 @@
 #include <boost/asio.hpp>
 #include <iostream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 using namespace boost::asio::ip;
 
-class EchoServer {
+class WebServer {
 private:
     class Connection {
     public:
@@ -19,49 +21,51 @@ private:
 
     void handle_request(shared_ptr<Connection> connection) {
         auto read_buffer = make_shared<boost::asio::streambuf>();
-        // Read from client until newline ("\r\n")
-        async_read_until(connection->socket, *read_buffer, "\r\n",
+        async_read_until(connection->socket, *read_buffer, "\r\n\r\n",
                          [this, connection, read_buffer](const boost::system::error_code &ec, size_t) {
-                             // If not error:
                              if (!ec) {
-                                 // Retrieve message from client as string:
-                                 istream read_stream(read_buffer.get());
-                                 std::string message;
-                                 getline(read_stream, message);
-                                 message.pop_back(); // Remove "\r" at the end of message
-
-                                 // Close connection when "exit" is retrieved from client
-                                 if (message == "exit")
-                                     return;
-
-                                 cout << "Message from a connected client: " << message << endl;
-
-                                 auto write_buffer = make_shared<boost::asio::streambuf>();
-                                 ostream write_stream(write_buffer.get());
-
-                                 // Add message to be written to client:
-                                 write_stream << message << "\r\n";
-
-                                 // Write to client
-                                 async_write(connection->socket, *write_buffer,
-                                             [this, connection, write_buffer](const boost::system::error_code &ec, size_t) {
-                                                 // If not error:
+                                 istream request_stream(read_buffer.get());
+                                 string http_method, http_path, http_version;
+                                 
+                                 // Parse HTTP request line
+                                 request_stream >> http_method >> http_path >> http_version;
+                                 
+                                 auto response = make_shared<boost::asio::streambuf>();
+                                 ostream response_stream(response.get());
+                                 
+                                 string body;
+    
+                                 if (http_method == "GET" && http_path == "/") {
+                                     body = "Dette er hovedsiden";
+                                 } else if (http_method == "GET" && http_path == "/en_side") {
+                                     body = "Dette er en side";
+                                 } else {
+                                     body = "Not Found";
+                                 }
+    
+                                 response_stream << "HTTP/1.1 ";
+                                 if (body == "Not Found") {
+                                     response_stream << "404 Not Found";
+                                 } else {
+                                     response_stream << "200 OK";
+                                 }
+                                 response_stream << "\r\nContent-Length: " << body.length() << "\r\n\r\n" << body;
+    
+                                 async_write(connection->socket, *response,
+                                             [this, connection, response](const boost::system::error_code &ec, size_t) {
                                                  if (!ec)
                                                      handle_request(connection);
                                              });
                              }
                          });
     }
+    
+    
 
     void accept() {
-        // The (client) connection is added to the lambda parameter and handle_request
-        // in order to keep the object alive for as long as it is needed.
         auto connection = make_shared<Connection>(io_service);
-
-        // Accepts a new (client) connection. On connection, immediately start accepting a new connection
         acceptor.async_accept(connection->socket, [this, connection](const boost::system::error_code &ec) {
             accept();
-            // If not error:
             if (!ec) {
                 handle_request(connection);
             }
@@ -69,20 +73,18 @@ private:
     }
 
 public:
-    EchoServer() : endpoint(tcp::v4(), 8080), acceptor(io_service, endpoint) {}
+    WebServer() : endpoint(tcp::v4(), 8080), acceptor(io_service, endpoint) {}
 
     void start() {
         accept();
-
         io_service.run();
     }
 };
 
 int main() {
-    EchoServer echo_server;
+    WebServer web_server;
 
-    cout << "Starting echo server" << endl
-         << "Connect in a terminal with: telnet localhost 8080. Type 'exit' to end connection." << endl;
+    cout << "Starting web server on http://localhost:8080" << endl;
 
-    echo_server.start();
+    web_server.start();
 }

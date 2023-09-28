@@ -10,12 +10,12 @@ public:
     Window() : box(Gtk::Orientation::ORIENTATION_VERTICAL) {
         button.set_label("Click here");
 
-        box.pack_start(entry);  // Add the widget entry to box
-        box.pack_start(button); // Add the widget button to box
-        box.pack_start(label);  // Add the widget label to box
+        box.pack_start(entry); 
+        box.pack_start(button);
+        box.pack_start(label);
 
-        add(box);   // Add vbox to window
-        show_all(); // Show all widgets
+        add(box);
+        show_all(); 
 
         entry.signal_changed().connect([this]() {
             label.set_text("Entry now contains: " + entry.get_text());

@@ -2,37 +2,68 @@
 
 class Window : public Gtk::Window {
 public:
-    Gtk::Box box;
-    Gtk::Entry entry;
-    Gtk::Button button;
-    Gtk::Label label;
+  Gtk::Box mainBox, firstNameBox, lastNameBox;
+  Gtk::Label firstNameLabel, lastNameLabel;
+  Gtk::Entry firstNameEntry, lastNameEntry;
+  Gtk::Button button;
+  Gtk::Label resultLabel;
 
-    Window() : box(Gtk::Orientation::ORIENTATION_VERTICAL) {
-        button.set_label("Click here");
+  Window()
+      : mainBox(Gtk::Orientation::ORIENTATION_VERTICAL),
+        firstNameBox(Gtk::Orientation::ORIENTATION_VERTICAL),
+        lastNameBox(Gtk::Orientation::ORIENTATION_VERTICAL) {
+    set_title("Name Combiner"); // Set the window title
 
-        box.pack_start(entry); 
-        box.pack_start(button);
-        box.pack_start(label);
+    // Set the labels' text
+    firstNameLabel.set_text("First Name:");
+    lastNameLabel.set_text("Last Name:");
 
-        add(box);
-        show_all(); 
+    button.set_label("Combine Names");
 
-        entry.signal_changed().connect([this]() {
-            label.set_text("Entry now contains: " + entry.get_text());
-        });
+    // Add the widgets to the firstName and lastName boxes
+    firstNameBox.pack_start(firstNameLabel);
+    firstNameBox.pack_start(firstNameEntry);
+    lastNameBox.pack_start(lastNameLabel);
+    lastNameBox.pack_start(lastNameEntry);
 
-        entry.signal_activate().connect([this]() {
-            label.set_text("Entry activated");
-        });
+    // Add widgets to main box
+    mainBox.pack_start(firstNameBox);
+    mainBox.pack_start(lastNameBox);
+    mainBox.pack_start(button);
+    mainBox.pack_start(resultLabel);
 
-        button.signal_clicked().connect([this]() {
-            label.set_text("Button clicked");
-        });
-    }
+    add(mainBox); // Add mainBox to window
+    show_all();   // Show all widgets
+
+    // Initialize button as insensitive
+    button.set_sensitive(false);
+
+    // Signal handlers
+    auto update_button_sensitivity = [this]() {
+      bool should_enable =
+          !firstNameEntry.get_text().empty() && !lastNameEntry.get_text().empty();
+      button.set_sensitive(should_enable);
+    };
+
+    firstNameEntry.signal_changed().connect([this, update_button_sensitivity]() {
+      update_button_sensitivity();
+    });
+
+    lastNameEntry.signal_changed().connect([this, update_button_sensitivity]() {
+      update_button_sensitivity();
+    });
+
+    button.signal_clicked().connect([this]() {
+      auto first_name = firstNameEntry.get_text();
+      auto last_name = lastNameEntry.get_text();
+      auto full_name = first_name + " " + last_name;
+      resultLabel.set_text("Combined Name: " + full_name);
+    });
+  }
 };
 
 int main() {
-    auto app = Gtk::Application::create();
-    Window window;
-    return app->run(window);
+  auto app = Gtk::Application::create();
+  Window window;
+  return app->run(window);
 }
